@@ -5,16 +5,17 @@ interface Props {
     tasks: Task[]; // tasks es un array de objetos de tipo Task
     toggleTask: (id: number) => void;
     deleteTask: (id: number) => void;
+    editTask: (id: number, text: string) => void;
 }
 
 
 // Definimos el componente TaskList, desestructurando la prop tasks y tipándola con Props
-const TaskList = ({ tasks, toggleTask, deleteTask }: Props) => {
+const TaskList = ({ tasks, toggleTask, deleteTask, editTask }: Props) => {
     return (
         <ul>
             {/* Iteramos sobre el array tasks y renderizamos cada tarea en un <li> */}
             {tasks.map(task => (
-                <li key={task.id} style={{ textDecoration: task.completed ? "line-through:none" : "none" }}>
+                <li key={task.id} style={{ textDecoration: task.completed ? "line-through" : "none" }}>
                     <input type="checkbox" key={task.id} onChange={() => toggleTask(task.id)} />
                     <button onClick={() => deleteTask(task.id)}>Delete</button>
                     {task.text} {/* Mostramos el texto de la tarea */}
