@@ -1,38 +1,38 @@
-import { useState } from "react"; // Importamos el hook useState de React
+import { useState } from "react";
 
-// Definimos una interfaz Props para tipar las propiedades del componente
-// addTask es una función que recibe un string y no devuelve nada (void)
 interface Props {
     addTask: (text: string) => void;
 }
 
-// Componente funcional TaskForm que recibe addTask como prop
 const TaskForm = ({ addTask }: Props) => {
-    // useState para manejar el estado del input (texto de la nueva tarea)
     const [text, setText] = useState("");
 
-    // Función que se ejecuta cuando el usuario envía el formulario
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); // Evita que la página se recargue al enviar el formulario
+        e.preventDefault();
 
-        if (!text.trim()) return; // Si el input está vacío o solo tiene espacios, no hace nada
+        if (!text.trim()) return;
 
-        addTask(text); // Llama a la función addTask y le pasa el texto como nueva tarea
-
-        setText(""); // Limpia el input después de agregar la tarea
+        addTask(text);
+        setText("");
     };
 
     return (
-        <form onSubmit={handleSubmit}> {/* Formulario con evento onSubmit */}
+        <form onSubmit={handleSubmit} className="w-full max-w-md mb-6 flex space-x-4">
             <input
                 type="text"
-                value={text} // El valor del input está vinculado al estado text
-                onChange={(e) => setText(e.target.value)} // Actualiza el estado al escribir
-                placeholder="Nueva tarea" // Muestra un mensaje en el input cuando está vacío
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder="Nueva tarea"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button type="submit">Agregar</button> {/* Botón para enviar el formulario */}
+            <button
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
+            >
+                Agregar
+            </button>
         </form>
     );
 };
 
-export default TaskForm; // Exportamos el componente para usarlo en otras partes de la app
+export default TaskForm;
